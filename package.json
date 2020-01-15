@@ -1,0 +1,32 @@
+{
+  "name": "Dr.NA_API",
+  "version": "1.0.0",
+  "description": "name : Masakatsu Shibata",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d app",
+    "start": "node app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/misotarozamurai/Dr.NA_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/misotarozamurai/Dr.NA_API/issues"
+  },
+  "homepage": "https://github.com/misotarozamurai/Dr.NA_API#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.0",
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.0"
+  },
+  "dependencies": {
+    "config": "^3.2.4",
+    "core-js": "^3.6.3",
+    "express": "^4.17.1",
+    "moment": "^2.24.0"
+  }
+}
