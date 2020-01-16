@@ -4,7 +4,7 @@
   "description": "name : Masakatsu Shibata",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d app",
+    "build": "babel ./ -d app --ignore node_modules,app",
     "start": "node app/app.js"
   },
   "repository": {
@@ -27,6 +27,7 @@
     "config": "^3.2.4",
     "core-js": "^3.6.3",
     "express": "^4.17.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "ws": "^7.2.1"
   }
 }

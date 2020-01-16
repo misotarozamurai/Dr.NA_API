@@ -1,5 +1,12 @@
 {
-  "ServerAPI": {
-    "port": 8085
+  "Port": 8889,
+  "DataDir": "data/",
+  "KeyRoot": "/etc/letsencrypt/live/dr-na.mydns.jp/",
+  "FileNames":{
+      "Key": "privkey.pem",
+      "Cert": "cert.pem",        
+      "Chain": "chain.pem",
+      "FullChain": "fullchain.pem",
+      "Result": "result.json"
   }
 }
