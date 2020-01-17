@@ -25,7 +25,7 @@ export default class WSS extends WebSocket.Server {
         sock.on('message', this._message.bind(this));
 
         // ----- When the socket is disconnected -----
-        sock.on('close', this._close);
+        sock.on('close', this._close.bind(this));
     };
 
     _message(message) {
