@@ -37,7 +37,7 @@ export default class WSS extends WebSocket.Server {
         log('stopping client send "close"');
 
         // Exclude broken sockets from array
-        connects = connects.filter( (conn, i) => {
+        this.connects = this.connects.filter( (conn, i) => {
             return (conn === sock) ? false : true;
         });
 
