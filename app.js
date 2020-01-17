@@ -11,9 +11,9 @@ import router from './routes'
 const app = express();
 
 const HTTPS_OPTIONS = {
-	key: fs.readFileSync(config.get('KeyRoot') + config.get('FileNames.Key')),
+	key	: fs.readFileSync(config.get('KeyRoot') + config.get('FileNames.Key')),
     cert: fs.readFileSync(config.get('KeyRoot') + config.get('FileNames.Cert')),
-    ca: fs.readFileSync(config.get('KeyRoot') + config.get('FileNames.Chain'))
+    ca	: fs.readFileSync(config.get('KeyRoot') + config.get('FileNames.Chain'))
 };
 const httpsServer = new https.createServer(HTTPS_OPTIONS,app);
 
