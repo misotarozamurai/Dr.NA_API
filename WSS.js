@@ -41,7 +41,7 @@ export default class WSS extends WebSocket.Server {
             return (conn === this.accessSocks) ? false : true;
         });
 
-        log('connected sockets : ' + connects.length);
+        log('connected sockets : ' + this.connects.length);
     }
 
     _broadcast(message) {
