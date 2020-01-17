@@ -41,7 +41,7 @@ export default class WSS extends WebSocket.Server {
   _broadcast(message,sock) {
     this.clients
       .forEach( client => {
-        if(client!==sock)socket.send(message)
+        if(client!==sock) client.send(message)
       });
   }
 }
