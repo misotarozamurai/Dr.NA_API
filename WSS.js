@@ -1,54 +1,47 @@
 import WebSocket from 'ws';
-import { log } from './utils/util';
+import Util from './utils/util';
 
 export default class WSS extends WebSocket.Server {
-    constructor(options, callback) {
-        super(options,callback);
-        this.on('connection',this._connection);
-        this.connects = [];
-        this.accessSock = {};
-    }
+  constructor(options, callback) {
+    super(options,callback);
+    this.on('connection',this._connection);
+    this.fromSock = {};
+  }
 
-    _connection(sock, req) {
-        log("webSocketServer connected!");
-        // Output connected IP address
-        const ip = req.connection.remoteAddress;
-        log("connected IP : " + ip);
+  _connection(sock, req) {
+    Util.log("webSocketServer connected!");
+    // Output connected IP address
+    const ip = req.connection.remoteAddress;
+    Util.log(`connected IP : ${ip}`);
 
-        // Store socket in array
-        this.connects.push(sock);
-        log('connected sockets : ' + this.connects.length);
+    // Store socket in array
+    Util.log(`connected sockets : ${this.clients.size}`);
+    // ----- When receiving a message -----
+    sock.on('message', message => this._message(message, sock));
 
-        this.accessSock = sock;
+    // ----- When the socket is disconnected -----
+    sock.on('close', (code, reason) => this._close(code, reason, sock));
+  };
 
-        // ----- When receiving a message -----
-        sock.on('message', this._message.bind(this));
+  _message(message, sock) {
+    Util.log(`received : ${message}`);
+    this._broadcast(message, sock);
+  }
 
-        // ----- When the socket is disconnected -----
-        sock.on('close', this._close.bind(this));
-    };
+  _close(code, reason) {
+    Util.log(
+      'stopping client send "close"',
+      `code: ${code}`,
+      `reason:`,
+      reason.split(/\.|.{100}/)
+    );
+    Util.log(`connected sockets : ${this.clients.size}`);
+  }
 
-    _message(message) {
-        log('received : ' + message);
-        this._broadcast(message);
-    }
-
-    _close() {
-        log('stopping client send "close"');
-
-        // Exclude broken sockets from array
-        this.connects = this.connects.filter( (conn, i) => {
-            return (conn === this.accessSock) ? false : true;
-        });
-
-        log('connected sockets : ' + this.connects.length);
-    }
-
-    _broadcast(message) {
-        this.connects
-            .filter(t=>t!==this.accessSock)
-            .forEach(socket => {
-                socket.send(message);
-            });
-    }
+  _broadcast(message,sock) {
+    this.clients
+      .forEach( client => {
+        if(client!==sock)socket.send(message)
+      });
+  }
 }
