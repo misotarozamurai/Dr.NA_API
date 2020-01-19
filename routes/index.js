@@ -19,7 +19,7 @@ router.route('/api')
 			  _message 	= req.body.message 	|| 'no message';
 		
 		const result = {
-			"datatime"	: moment().format("YYYY-MM-DD"),
+			"datetime"	: moment().format("YYYY-MM-DD"),
 			"pulse"   	: { "avg": _avg },
 			"height"  	: _height,
 			"sick"	  	: {
